@@ -4,20 +4,36 @@
 
 A small browser workshop for experimenting with what your models could become: a hero, a prop, a weapon — or a sword that decides to be the hero.
 
-Bring a GLB, choose a pixel style, bake eight directions and try the result in a playable adventure. Processing happens locally in your browser; no account or API key is needed. The current interface is in German.
+Built for indie game developers, 3D artists and people who want to make something strange. Bring a GLB, choose a pixel style, bake eight directions and try the result in a playable adventure.
+
+**Early playable prototype · Local setup · German UI · No hosted demo yet**
+
+[Get started](#run-locally) · [Report a bug or share a creation](https://github.com/mikelninh/form-pixel/issues/new/choose) · [Contribute](CONTRIBUTING.md)
+
+![Original MOMO model beside its actual 64 × 64 pixel conversion](docs/preview.png)
+
+*An original demo model, rendered through the workshop's conversion pipeline. Whole-object motion; no generated rig or walk cycle.*
+
+## The experiment
+
+**What is the most unexpected object you can turn into a dungeon hero?**
+
+Start with the included sword, then try your own model. Share a short clip and one thing that got in your way. You can play as any model, carry it as cosmetic equipment, or use it as a prop. No account or API key is needed to run the workshop; files are processed locally.
 
 ## Run locally
 
-Clone this standalone workshop: `git clone https://github.com/mikelninh/form-pixel.git`, then `cd form-pixel`.
-
-Install Node.js 20 or newer with npm, then run from the repository directory:
+You need **Node.js 20+**, **npm**, **Git**, and a modern browser with WebGL. Run:
 
 ```sh
+git clone https://github.com/mikelninh/form-pixel.git
+cd form-pixel
 npm ci --no-audit --no-fund
-node server.mjs
+npm start
 ```
 
-Open http://127.0.0.1:4177/. The server binds to localhost. Keep the terminal running.
+Open http://127.0.0.1:4177/ on the same computer. Keep the terminal running. This is a local development server, not a public demo URL.
+
+Without Git: use **Code → Download ZIP**, extract it, then run the last two commands inside that folder. Start with a bundled example; no 3D file is required.
 
 ## Try this first
 
@@ -41,7 +57,7 @@ Open http://127.0.0.1:4177/. The server binds to localhost. Keep the terminal ru
 
 This is a prototype. It does not generate a skeleton or a walk cycle, and it does not play imported skeletal animations. Draco, Meshopt and KTX2 decoders are not configured. Usage suggestions rely on example metadata, names and rig hints; they are editable, not reliable semantic recognition. All models can be chosen as heroes.
 
-There is no multiplayer, hosted feedback service, VeVe connection or VeVe exporter. Conversion does not grant rights to an imported model. Save identity currently uses the source name, so identically named imports can share progress.
+There is no multiplayer, dedicated feedback backend, VeVe connection or VeVe exporter. Conversion does not grant rights to an imported model. Save identity currently uses the source name, so identically named imports can share progress.
 
 ## Make something unexpected
 
@@ -66,14 +82,17 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for small starter tasks and useful bug re
 These checks require Node.js and do not require a browser automation setup:
 
 ```sh
-node verify-feedback.mjs
-node verify-ruins.mjs
-node verify-heimkehr.mjs
-node verify-dungeon.mjs
-node verify-dungeon-hazards.mjs
+npm test
 ```
 
-They validate game logic, not visual quality or a full human playthrough. Other historical verification scripts may reference the original development machine and are not part of these portable checks.
+Runs five scripts covering feedback draft safety and the three adventure implementations. GitHub Actions runs these checks on pushes and pull requests. They validate logic, not visual quality or a full human playthrough.
+
+## If something does not work
+
+- **Blank preview:** use a WebGL-capable browser and enable hardware acceleration if it is disabled. Try a bundled example first.
+- **Model fails to import:** use an uncompressed GLB under 40 MB with embedded textures; see the limitations above.
+- **Port already in use:** close the other local server, or set the `PORT` environment variable before starting.
+- **Feedback not received:** saving locally does not send it. Open the GitHub draft, review it and submit the issue yourself.
 
 ## License
 
