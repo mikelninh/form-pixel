@@ -1,0 +1,19 @@
+{
+  "name": "form-pixel",
+  "version": "0.6.0",
+  "private": true,
+  "type": "module",
+  "description": "Turn 3D models into pixel sprites and play them in a tiny dungeon",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node verify-feedback.mjs && node verify-ruins.mjs && node verify-heimkehr.mjs && node verify-dungeon.mjs && node verify-dungeon-hazards.mjs"
+  },
+  "dependencies": {
+    "fflate": "^0.8.2",
+    "three": "^0.180.0"
+  }
+}
